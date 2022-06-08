@@ -27,9 +27,9 @@ class SChainFaucet {
         this.app.get('/', (req: Request, res: Response) => {
             return res.status(200).send("Faucet Active");
         })
-        this.app.get('/developer', Controller.DeveloperController);
-        this.app.get('/dot', Controller.DotController);
-        this.app.get('/general', Controller.GeneralController);
+        this.app.get('/developer/:address', Controller.DeveloperController);
+        this.app.get('/dot/:address', Controller.DotController);
+        this.app.get('/general/:address', Controller.GeneralController);
     }
 
     private async _initializeFaucetManager() {
