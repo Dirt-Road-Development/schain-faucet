@@ -25,7 +25,7 @@
  * Questions regarding the pseudonym of TheGreatAxios can be forwarded to thegreataxios@mylilius.com
 **/
 
-import { BigNumber, ethers } from 'ethers';
+import { BigNumber, ethers, providers } from 'ethers';
 import { Request, Response } from 'express';
 import { checkBalance, isDOT, Provider, sendTransaction } from '../utils';
 import { checkAddress } from '../utils/address';
@@ -34,9 +34,10 @@ const MINIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.000005');
 const MAXIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.0005')
 
 export const DeveloperController = async(req: Request, res: Response) => {
+    const provider: Provider = new Provider();
     try {
         /// 0 -> Create Provider
-        const provider: Provider = new Provider();
+        
         /// 1 -> Check Address/Validate
         const address: string = req.params.address;
         const isAddress: boolean = typeof address === 'string' && checkAddress(address);
@@ -61,5 +62,7 @@ export const DeveloperController = async(req: Request, res: Response) => {
         });
     } catch (err: any) {
         throw new Error(err);
+    } finally {
+        provider.closeProvider();
     }
 }

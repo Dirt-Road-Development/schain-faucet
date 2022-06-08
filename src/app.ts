@@ -3,6 +3,7 @@ import * as Middleware from "./middleware";
 import * as Controller from './controllers';
 
 import { PORT } from './config/config';
+import { fillFaucet, Provider } from "./utils";
 
 class SChainFaucet {
 
@@ -13,6 +14,8 @@ class SChainFaucet {
         this._initializeGlobalMiddleware();
         /// Initialize Controllers
         this._initializeControllers();
+        /// Fill Faucet Manager -- Automatic Balance Checks
+        this._initializeFaucetManager();
     }
 
     private _initializeGlobalMiddleware() {
@@ -27,7 +30,12 @@ class SChainFaucet {
         this.app.get('/developer', Controller.DeveloperController);
         this.app.get('/dot', Controller.DotController);
         this.app.get('/general', Controller.GeneralController);
-        
+    }
+
+    private async _initializeFaucetManager() {
+        const provider: Provider = new Provider();
+        await fillFaucet(provider.signer);
+        provider.closeProvider();
     }
 
     public listen() {

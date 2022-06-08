@@ -34,9 +34,9 @@ const MINIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.000000005');
 const MAXIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.000005')
 
 export const DotController = async(req: Request, res: Response) => {
+    /// 0 -> Create Provider
+    const provider: Provider = new Provider();
     try {
-        /// 0 -> Create Provider
-        const provider: Provider = new Provider();
         /// 1 -> Check Address/Validate
         const address: string = req.params.address;
         const isAddress: boolean = typeof address === 'string' && checkAddress(address);
@@ -62,5 +62,7 @@ export const DotController = async(req: Request, res: Response) => {
         });
     } catch (err: any) {
         throw new Error(err);
+    } finally {
+        provider.closeProvider();
     }
 }
