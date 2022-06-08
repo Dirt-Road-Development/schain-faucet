@@ -21,6 +21,9 @@ class SChainFaucet {
         Middleware.useHelmet(this.app);
     }
     private _initializeControllers() {
+        this.app.get('/', (req: Request, res: Response) => {
+            return res.status(200).send("Faucet Active");
+        })
         this.app.get('/developer', Controller.DeveloperController);
         this.app.get('/dot', Controller.DotController);
         this.app.get('/general', Controller.GeneralController);
