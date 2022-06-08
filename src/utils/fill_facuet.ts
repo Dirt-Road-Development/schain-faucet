@@ -59,6 +59,7 @@ const _fillFaucet = async(wallet: Wallet, amount: BigNumber) : Promise<providers
         const contract: Contract = CONTRACT.connect(wallet);
         // const estimate: BigNumber = await contract.estimateGas.partiallyRetrieve(wallet.address, amount);
         return await contract.partiallyRetrieve(wallet.address, amount, {
+            gasPrice: ethers.utils.hexlify(1000000),
             gasLimit: ethers.utils.hexlify(50000000)
         });
     } catch (err: any) {
