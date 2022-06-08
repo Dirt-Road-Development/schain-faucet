@@ -29,13 +29,14 @@ import { ethers, Contract } from 'ethers';
 import { ABIs } from '../config/abis';
 import { ADDRESSES } from '../config/addresses';
 
-const CONTRACT: Contract = new ethers.Contract(ADDRESSES['dot_name_service'], ABIs['dot_name_service']);
+// const CONTRACT: Contract = new ethers.Contract(ADDRESSES['dot_name_service'], ABIs['dot_name_service']);
 
 export const isDOT = async(provider: ethers.providers.WebSocketProvider, address: string) : Promise<boolean> => {
 
     try {
-        const contract: Contract = CONTRACT.connect(provider);
-        return await contract.callStatic.dotIsClaimed(address);
+        // const contract: Contract = CONTRACT.connect(provider);
+        // return await contract.callStatic.dotIsClaimed(address);
+        return false;
     } catch (err: any) {
         throw new Error(err);
     }
