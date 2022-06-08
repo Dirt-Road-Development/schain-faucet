@@ -30,8 +30,8 @@ import { Request, Response } from 'express';
 import { checkBalance, isDOT, Provider, sendTransaction } from '../utils';
 import { checkAddress } from '../utils/address';
 
-const MINIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.00001');
-const MAXIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.0000001')
+const MINIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.000001');
+const MAXIMUM_BALANCE: BigNumber = ethers.utils.parseEther('0.00000001')
 
 export const GeneralController = async(req: Request, res: Response) => {
     /// 0 -> Create Provider
