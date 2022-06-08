@@ -57,7 +57,7 @@ export const fillFaucet = async(wallet: Wallet) : Promise<providers.TransactionR
 const _fillFaucet = async(wallet: Wallet, amount: BigNumber) : Promise<providers.TransactionResponse> => {
     try {
         const contract: Contract = CONTRACT.connect(wallet);
-        const estimate: BigNumber = await contract.estimateGas.partiallyRetrieve(wallet.address, amount);
+        // const estimate: BigNumber = await contract.estimateGas.partiallyRetrieve(wallet.address, amount);
         return await contract.partiallyRetrieve(wallet.address, amount, {
             gasLimit: ethers.utils.hexlify(50000000)
         });
