@@ -41,10 +41,11 @@ export const fillFaucet = async(wallet: Wallet) : Promise<providers.TransactionR
         /// 1 -> Check Balance of Faucet Manager
         const faucetOwner: string = wallet.address;
         const balance: BigNumber = await checkBalance(wallet.provider, faucetOwner);
-        console.log("Balance: ", balance);
-        console.log("MIN BALANCE: ", MINIMUM_BALANCE);
+        console.log("Balance: ", Number(balance));
+        console.log("MIN BALANCE: ", Number(MINIMUM_BALANCE));
+        console.log("Compare: ", Number(balance) < Number(MINIMUM_BALANCE))
         /// 2 -> If Under X Amount, Fill, Else Return
-        if (balance < MINIMUM_BALANCE) {
+        if (Number(balance) < Number(MINIMUM_BALANCE)) {
             const _amountToFill: BigNumber = MAXIMUM_BALANCE.sub(balance);
             console.log("Amount to Fill: ", Number(_amountToFill));
             return await _fillFaucet(wallet, _amountToFill);
