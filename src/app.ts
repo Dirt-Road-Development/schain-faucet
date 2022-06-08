@@ -2,6 +2,8 @@ import express, { Application, Express, Request, Response } from "express";
 import * as Middleware from "./middleware";
 import * as Controller from './controllers';
 
+import { PORT } from './config/config';
+
 class SChainFaucet {
 
     private app: Express = express();
@@ -10,6 +12,7 @@ class SChainFaucet {
         /// Initialize Middleware
         this._initializeGlobalMiddleware();
         /// Initialize Controllers
+        this._initializeControllers();
     }
 
     private _initializeGlobalMiddleware() {
@@ -24,4 +27,13 @@ class SChainFaucet {
         
     }
 
+    public listen() {
+        this.app.listen(PORT, () => {
+            console.log("Faucet Listening on PORT: ", PORT);
+        })
+    }
+}
+
+export {
+    SChainFaucet
 }
