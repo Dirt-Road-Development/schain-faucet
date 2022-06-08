@@ -41,9 +41,12 @@ export const fillFaucet = async(wallet: Wallet) : Promise<providers.TransactionR
         /// 1 -> Check Balance of Faucet Manager
         const faucetOwner: string = wallet.address;
         const balance: BigNumber = await checkBalance(wallet.provider, faucetOwner);
+        console.log("Balance: ", balance);
+        console.log("MIN BALANCE: ", MINIMUM_BALANCE);
         /// 2 -> If Under X Amount, Fill, Else Return
         if (balance < MINIMUM_BALANCE) {
             const _amountToFill: BigNumber = MAXIMUM_BALANCE.sub(balance);
+            console.log("Amount to Fill: ", Number(_amountToFill));
             return await _fillFaucet(wallet, _amountToFill);
         }
 
@@ -58,10 +61,11 @@ const _fillFaucet = async(wallet: Wallet, amount: BigNumber) : Promise<providers
     try {
         const contract: Contract = CONTRACT.connect(wallet);
         // const estimate: BigNumber = await contract.estimateGas.partiallyRetrieve(wallet.address, amount);
-        return await contract.partiallyRetrieve(wallet.address, amount, {
+        let txHash = await contract.partiallyRetrieve(wallet.address, amount, {
             gasPrice: ethers.utils.hexlify(1000000),
             gasLimit: ethers.utils.hexlify(50000000)
         });
+        return txHash;
     } catch (err: any) {
         throw new Error(err);
     }
