@@ -45,6 +45,7 @@ export const GeneralController = async(req: Request, res: Response) => {
 
         /// Check Balance
         const balance: BigNumber = await checkBalance(provider.provider, address);
+        // console.log("Balance: ", balance);
         if (balance >= MINIMUM_BALANCE) {
             return res.status(200).send('Sufficient Balance');
         } else if (balance >= MAXIMUM_BALANCE) {

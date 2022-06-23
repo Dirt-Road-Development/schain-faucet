@@ -21,6 +21,7 @@ class SChainFaucet {
     private _initializeGlobalMiddleware() {
         Middleware.useJson(this.app);
         Middleware.useUrlEncoded(this.app);
+        Middleware.useCors(this.app);
         Middleware.useHelmet(this.app);
     }
     private _initializeControllers() {
