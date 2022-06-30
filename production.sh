@@ -4,7 +4,7 @@ npm install --production
 
 echo "Production Dependencies Installed"
 
-sudo npm install pm2
+sudo npm install pm2 -g
 
 echo "PM2 Installed"
 
