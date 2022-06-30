@@ -37,7 +37,7 @@ export const DeveloperController = async(req: Request, res: Response) => {
     const provider: Provider = new Provider();
     try {
         /// 0 -> Create Provider
-        
+
         /// 1 -> Check Address/Validate
         const address: string = req.params.address;
         const isAddress: boolean = typeof address === 'string' && checkAddress(address);
